@@ -1,0 +1,121 @@
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.leftNav {
+  height: 100%;
+  width: 30%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #f0f0f0;
+}
+
+.temperature {
+  display: flex;
+  flex-direction: column;
+  /* margin: 20rpx 0; */
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ddd;
+  font-size: 34rpx;
+  color: #363636;
+  text-align: center;
+}
+
+.temperature text {
+  font-size: 30rpx;
+}
+
+.temperature_active {
+  display: flex;
+  flex-direction: column;
+  /* margin: 20rpx 0; */
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #72c0dc;
+  font-size: 34rpx;
+  color: #72c0dc;
+  text-align: center;
+  background: #fff;
+}
+
+.temperature_active text {
+  font-size: 30rpx;
+}
+
+.rightNav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  background: #fff;
+}
+
+.headline {
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  margin: 20rpx 100rpx;
+  font-weight: bolder;
+  color: #72c0dc;
+}
+
+.headline text {
+  width: 150rpx;
+  text-align: center;
+}
+
+.line {
+  width: 60rpx;
+  border-top: 1rpx solid #72c0dc;
+  margin: auto 20rpx;
+}
+
+.listContainer {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.list {
+  margin: 25rpx;
+  width: 300rpx;
+  height: 300rpx;
+  display: inline-block;
+}
+
+.list image {
+  margin: 50rpx;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.hint {
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+}
+
+.addButton {
+  position: absolute;
+  left: 5%;
+  bottom: 10%;
+  width: 150rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+  border-radius: 50%;
+  font-size: 26rpx;
+  background: #72c0dc;
+  color: #fff;
+  text-align: center;
+  opacity: 0.8;
+}
+button[size='mini']{
+  line-height: 146rpx;
+  border: none;
+  color: #fff;
+  background: #72c0dc;
+}

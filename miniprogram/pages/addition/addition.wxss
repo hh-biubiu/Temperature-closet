@@ -1,0 +1,76 @@
+page {
+  background: #f0f0f0;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 600rpx;
+}
+
+.imageContainer image {
+  margin: 50rpx;
+  width: 350rpx;
+  height: 350rpx;
+}
+
+.imageContainer_active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400rpx;
+}
+
+.imageContainer_active image {
+  margin: 50rpx;
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  padding: 0 10rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #ddd;
+  line-height: 100rpx;
+  height: 100rpx;
+  justify-content: space-between;
+}
+
+.picker {
+  text-align: center;
+  position: relative;
+  width: 60%;
+}
+
+.picker::after {
+  display: block;
+  content: "＞";
+  position: absolute;
+  font-size: 40rpx;
+  color: #999;
+  line-height: 100rpx;
+  width: 60rpx;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  right: 0rpx;
+  margin: auto;
+}
+
+.submitButton {
+  margin: 20rpx 75rpx;
+  width: 600rpx;
+  color: #fff;
+  background: #72c0dc;
+}
+.weui-input{
+  width: 100%;
+  height: 55px;
+}

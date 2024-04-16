@@ -1,0 +1,97 @@
+<view class="container" wx:if="{{!loading}}">
+  <view class="backgroundImage"></view>
+  <view class="weatherContainer">
+    <!-- <view class="title">我的位置</view> -->
+    <view class="city">{{weatherRangeData.results[0].location.name}}</view>
+    <view class="temperature">
+
+      {{weatherData.results[0].now.temperature}}°C
+    </view>
+    <view class="range">
+      <view>
+        <text class="label">最高</text>
+        <text>{{weatherRangeData.results[0].daily[0].high}}°C</text>
+      </view>
+      <view>
+        <text class="label">最低</text>
+        <text>{{weatherRangeData.results[0].daily[0].low}}°C</text>
+      </view>
+    </view>
+    <view class="weather">
+      {{weatherData.results[0].now.text}}
+    </view>
+    <view class="weatherText">
+      {{lifeData.results[0].suggestion.dressing.details.message}}
+    </view>
+    <view class="weatherText" wx:if="{{weatherRangeData.results[0].daily[0].high-weatherRangeData.results[0].daily[0].low>=8}}">
+      今日温差超过8℃，外出请携带外套
+    </view>
+  </view>
+
+  <view class="suit-wrap">
+    <view class="suit-title">推荐上衣</view>
+    <view class="suitContainer">
+      <block
+        wx:for="{{suit.clothes}}"
+        wx:key="index"
+        wx:if="{{suit.clothes&&suit.clothes.length>0}}"
+      >
+        <view class="suitImageContainer">
+
+          <image src="{{item.imageUrl}}" mode="aspectFit" />
+
+        </view>
+      </block>
+      <view class="no-clothes" wx:if="{{suit['clothes']&&suit.clothes.length==0}}">暂无适合当前气温的上衣，请先购买</view>
+    </view>
+    <view class="suit-title">推荐裤子</view>
+    <view class="suitContainer">
+      <block
+        wx:for="{{suit.pants}}"
+        wx:key="index"
+        wx:if="{{suit.pants&&suit.pants.length>0}}"
+      >
+        <view class="suitImageContainer">
+          <image src="{{item.imageUrl}}" mode="aspectFit" />
+        </view>
+      </block>
+      <view class="no-clothes" wx:if="{{suit.pants.length==0}}">暂无适合当前气温的裤子，请先购买</view>
+    </view>
+    <view class="suit-title">推荐连衣裙</view>
+    <view class="suitContainer">
+      <block
+        wx:for="{{suit.skirt}}"
+        wx:key="index"
+        wx:if="{{suit.skirt&&suit.skirt.length>0}}"
+      >
+        <view class="suitImageContainer">
+          <image src="{{item.imageUrl}}" mode="aspectFit" />
+        </view>
+      </block>
+      <view class="no-clothes" wx:if="{{suit.skirt.length==0}}">暂无适合当前气温的连衣裙，请先购买</view>
+    </view>
+    <view class="suit-title">推荐外套</view>
+    <view class="suitContainer">
+      <block
+        wx:for="{{suit.coat}}"
+        wx:key="index"
+        wx:if="{{suit.coat&&suit.coat.length>0}}"
+      >
+        <view class="suitImageContainer">
+          <image src="{{item.imageUrl}}" mode="aspectFit" />
+        </view>
+      </block>
+      <view class="no-clothes" wx:if="{{suit.coat.length<=0}}">暂无适合当前气温的外套，请先购买</view>
+    </view>
+  </view>
+  <button
+    wx:if="{{!isLogin}}"
+    open-type="getUserInfo"
+    bindgetuserinfo="doLogin"
+    size="mini"
+    plain="{{ true }}"
+    class="btn"
+  >登录
+  </button>
+</view>
+

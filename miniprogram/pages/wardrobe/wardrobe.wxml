@@ -1,0 +1,130 @@
+<view class="container">
+  <view class="leftNav">
+    <block wx:for="{{leftList}}" wx:key="index">
+      <view
+        bindtap="selectType"
+        data-type="{{item.type}}"
+        class="{{item.type==type?'temperature_active':'temperature'}}"
+      >
+        {{item.title}}
+        <text>{{item.temperature}}</text>
+      </view>
+    </block>
+  </view>
+
+  <scroll-view
+    class="rightNav"
+    scroll-y
+    style="height:{{height}}px"
+  >
+    <view class='headline'>
+      <view class='line'></view>
+      <text>{{rightList[0].title}}</text>
+      <view class='line'></view>
+    </view>
+    <scroll-view
+      class="listContainer"
+      scroll-x
+      style="{{clothes.length>0?'height:350rpx':'height:100rpx'}}"
+    >
+      <view
+        class="list"
+        wx:for="{{clothes}}"
+        wx:key="index"
+        wx:if="{{clothes.length>0}}"
+      >
+        <image src="{{item.imageUrl}}" mode="aspectFit" />
+      </view>
+      <view class="hint" wx:if="{{clothes.length<=0}}">
+        还未有适合当前气候的上衣
+      </view>
+    </scroll-view>
+
+    <view class='headline'>
+      <view class='line'></view>
+      <text>{{rightList[1].title}}</text>
+      <view class='line'></view>
+    </view>
+    <scroll-view
+      class="listContainer"
+      scroll-x
+      style="{{pants.length>0?'height:350rpx':'height:100rpx'}}"
+    >
+      <view
+        class="list"
+        wx:for="{{pants}}"
+        wx:key="index"
+        wx:if="{{pants.length>0}}"
+      >
+        <image src="{{item.imageUrl}}" mode="aspectFit" />
+      </view>
+      <view class="hint" wx:if="{{pants.length<=0}}">
+        还未有适合当前气候的下衣
+      </view>
+    </scroll-view>
+
+    <view class='headline'>
+      <view class='line'></view>
+      <text>{{
+        rightList[2].title}}</text>
+      <view class='line'></view>
+    </view>
+    <scroll-view
+      class="listContainer"
+      scroll-x
+      style="{{coat.length>0?'height:350rpx':'height:100rpx'}}"
+    >
+      <view
+        class="list"
+        wx:for="{{coat}}"
+        wx:key="index"
+        wx:if="{{coat.length>0}}"
+      >
+        <image src="{{item.imageUrl}}" mode="aspectFit" />
+      </view>
+      <view class="hint" wx:if="{{coat.length<=0}}">
+        还未有适合当前气候的外套
+      </view>
+    </scroll-view>
+    <view class='headline'>
+      <view class='line'></view>
+      <text>{{
+        rightList[3].title}}</text>
+      <view class='line'></view>
+    </view>
+    <scroll-view
+      class="listContainer"
+      scroll-x
+      style="{{skirt.length>0?'height:350rpx':'height:100rpx'}}"
+    >
+      <view
+        class="list"
+        wx:for="{{skirt}}"
+        wx:key="index"
+        wx:if="{{skirt.length>0}}"
+      >
+        <image src="{{item.imageUrl}}" mode="aspectFit" />
+      </view>
+      <view class="hint" wx:if="{{skirt.length<=0}}">
+        还未有适合当前气候的连衣裙
+      </view>
+    </scroll-view>
+  </scroll-view>
+
+  <view
+    class="addButton"
+    bindtap="addition"
+    wx:if="{{isLogin}}"
+  >放进衣柜
+  </view>
+  <button
+    wx:if="{{!isLogin || wx.getStorageSync('openid')}}"
+    open-type="getUserInfo"
+    bindgetuserinfo="doLogin"
+    size="mini"
+    plain="{{ true }}"
+    class="addButton btn"
+  >登录
+  </button>
+</view>
+

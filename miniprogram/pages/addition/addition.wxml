@@ -1,0 +1,73 @@
+<view class="container">
+  <view class="{{imageUrl?'imageContainer':'imageContainer_active'}}">
+    <image
+      bindtap="addImage"
+      wx:if="{{!imageUrl}}"
+      src="../../images/icon_add.png"
+    />
+    <image
+      wx:else
+      src="{{imageUrl}}"
+      mode="aspectFill"
+    ></image>
+    <view wx:if="{{!imageUrl}}">点击图标上传衣着图片</view>
+  </view>
+
+  <view class="section">
+    <view> 请选择适合着装温度 </view>
+    <picker
+      name="temperature"
+      class="picker"
+      bindchange="selectTemperature"
+      range-key="temperature"
+      range="{{temperature}}"
+    >
+      <view>
+        {{temperature[temperatureIndex].temperature}}
+      </view>
+    </picker>
+  </view>
+  <!-- <view class="section">
+    <view> 请选择衣物温度 </view>
+    <picker
+      name="clothesTemperature"
+      class="picker"
+      bindchange="selectClothesTemperature"
+      range="{{clothesTemperature}}"
+    >
+      <view>
+        {{clothesTemperature[clothestemperatureIndex]}}°C
+      </view>
+    </picker>
+  </view> -->
+  <view class="section">
+    <view> 请选择着装类型</view>
+    <picker
+      name="category"
+      class="picker"
+      bindchange="selectCategory"
+      range-key="title"
+      range="{{category}}"
+    >
+      <view>
+        {{category[categoryIndex].title}}
+      </view>
+    </picker>
+  </view>
+  <view class="section">
+    <view> 请输入衣物颜色</view>
+    <view class="weui-cell weui-cell_input">
+      <input
+        class="weui-input"
+        auto-focus
+        placeholder="请输入衣物颜色"
+        bindinput="getColor"
+        value="{{color}}"
+      />
+    </view>
+  </view>
+
+  <button class="submitButton" bindtap="submit">添加到衣柜</button>
+
+</view>
+
