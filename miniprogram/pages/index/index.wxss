@@ -107,7 +107,7 @@
 .no-clothes{
   height: 240rpx;
   line-height: 240rpx;
-  color: #f1f0f0;
+  color: rgb(139, 136, 136);
 }
 .btn{
   position: fixed;
@@ -124,4 +124,77 @@ button[size='mini']{
   border: none;
   color: #fff;
   background-color: rgb(81, 133, 153);
+}
+.tab{
+  width: 90%;
+  margin: 0 auto;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 20rpx;
+  background-color: rgb(193, 205, 245);
+}
+.tab text{
+ width: 50%;
+ height: 100%;
+ text-align: center;
+ border-radius: 20rpx 0 0 20rpx;
+ line-height: 80rpx;
+}
+.tab text:last-of-type{
+  border-radius: 0rpx 20rpx 20rpx 0 ;
+}
+.tab .active{
+  background-color: rgb(166, 194, 247);
+  color: #f1f0f0;
+}
+.headline {
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  font-weight: bolder;
+  color: #4f5050;
+  margin: 20px auto 10rpx;
+  width: 50%;
+}
+
+.headline text {
+  width: 150rpx;
+  text-align: center;
+}
+
+.line {
+  width: 60rpx;
+  border-top: 1rpx solid #e8e8ec;
+  margin: auto 20rpx;
+}
+.ossionType{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 10rpx auto;
+  height: 60rpx;
+  border-radius: 10rpx;
+  background-color: aliceblue; 
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.ossionType text{
+  flex: 1;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border-radius: 10rpx 0rpx 0 10rpx;
+}
+.ossionType text:nth-of-type(2){
+  border-radius: 0rpx;
+}
+.ossionType text:last-of-type{
+  border-radius: 0rpx 10rpx 10rpx 0 ;
+}
+.ossionType .active{
+  background-color: rgb(166, 194, 247);
+  color: #f1f0f0;
 }

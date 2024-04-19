@@ -19,14 +19,16 @@ Page({
     isLogin: app.globalData.isLogin,
     lat:"",
     lon:"",
+    dress:"",
     suit: {
       "clothes": [],
       "pants": [],
       "coat": [],
       "skirt": []
-    }
-
-
+    },
+    curindex:0,
+    typeindex:0,
+    occasionList:app.globalData.occasionList
   },
   onLoad() {
     this._checkLogin()
@@ -165,9 +167,12 @@ Page({
     let dress = dressing(temperature)
     let suit = this.data.suit
     lifeData.results[0].suggestion.dressing.details = dress
+    this.setData({
+      dress
+    })
     console.log('opneid',this.data.isLogin , wx.getStorageSync('openid'))
     if (this.data.isLogin || wx.getStorageSync('openid')) {
-      this.getSuit(suit, dress.type)
+      this.getSuit({temperatureType: dress.type})
     }
 
     this.setData({
@@ -180,15 +185,16 @@ Page({
 
   },
 
-  async getSuit(category, type) {
+  async getSuit(req={}) {
     // let radio = 26 - temperature
     // console.log('radio', radio);
     let data = {}
 
-    for (let index in category) {
+    for (let index in this.data.suit) {
       await db.collection(index).aggregate()
         .match({
-          temperatureType: type,
+          ...req,
+          temperatureType: this.data.dress.type,
           openid: wx.getStorageSync('openid')
         }).sample({
           size: 3
@@ -205,11 +211,29 @@ Page({
         suit: data,
         loading: false
       })
+      console.log(this.data.suit);
     }
 
 
     hideLoading()
 
   },
-
+  changeTab(e){
+    console.log(e);
+    this.setData({
+      curindex:e.target.dataset.curindex,
+      typeindex:0
+    })
+    let req = this.data.curindex==0?{}:{occasionType:1}
+    this.getSuit(req)
+  },
+  changeOssionType(e){
+    console.log(e);
+    let {typeindex} = e.target.dataset
+    this.setData({
+      typeindex
+    })
+   
+    this.getSuit( {occasionType:typeindex+1})
+  },
 })

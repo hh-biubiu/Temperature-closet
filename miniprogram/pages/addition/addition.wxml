@@ -55,6 +55,20 @@
     </picker>
   </view>
   <view class="section">
+    <view> 请选择适合着装场合</view>
+    <picker
+      name="occasionList"
+      class="picker"
+      bindchange="selectOccasion"
+      range-key="title"
+      range="{{occasionList}}"
+    >
+      <view>
+        {{occasionList[occasionIndex].title}}
+      </view>
+    </picker>
+  </view>
+  <view class="section">
     <view> 请输入衣物颜色</view>
     <view class="weui-cell weui-cell_input">
       <input
@@ -67,7 +81,18 @@
     </view>
   </view>
 
-  <button class="submitButton" bindtap="submit">添加到衣柜</button>
+  <button
+    class="submitButton"
+    bindtap="submit"
+    wx:if="{{add}}"
+  >添加到衣柜
+  </button>
+  <button
+    class="submitButton"
+    bindtap="submit"
+    wx:if="{{!add}}"
+  >保存到衣柜
+  </button>
 
 </view>
 

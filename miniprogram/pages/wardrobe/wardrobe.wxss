@@ -84,6 +84,7 @@
   margin: 25rpx;
   width: 300rpx;
   height: 300rpx;
+  position: relative;
   display: inline-block;
 }
 
@@ -118,4 +119,26 @@ button[size='mini']{
   border: none;
   color: #fff;
   background: #72c0dc;
+}
+
+.opt-btn{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 200rpx;
+  height: 200rpx;
+  right: 50rpx;
+  top: 50rpx;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.opt-btn view{
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.checked{
+  color: rgb(233, 214, 109);
 }

@@ -17,17 +17,60 @@ Page({
     temperatureIndex: '0',
     clothestemperatureIndex: '0',
     categoryIndex: '0',
+    occasionIndex:'0',
     temperatureType: 1,
     categoryType: 'clothes',
-    color:'',
-    clothesTemperature:[0.5,1,2,3,4,5,6,7,8,9]
+    color: '',
+    clothesTemperature: [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    add: true,
+    curId:"",
+    curCategoryType:'',
+    occasionList:app.globalData.occasionList,
+    occasionType:1,
+    occasionIndex:0,
+    curType:'temperature',
   },
 
-  onLoad() {
+  onLoad(option) {
     this.setData({
       temperature: app.globalData.leftList,
       category: app.globalData.rightList
     })
+    console.log('option',option);
+    if(option?.curType){
+      this.setData({
+        curType:option.curType
+      })
+    }
+    if (option?.clothes) {
+      console.log('option', JSON.parse(option.clothes));
+      wx.setNavigationBarTitle({
+        title: '编辑衣物'
+     })
+     
+      let {
+        imageUrl,
+        color,
+        temperatureType,
+        categoryType,_id,
+        occasionType
+      } = JSON.parse(option.clothes)
+      let categoryIndex = app.globalData.rightList.findIndex(t => t.type == categoryType)
+      let occasionIndex = app.globalData.occasionList.findIndex(t => t.type == occasionType)
+      this.setData({
+        add: false,
+        imageUrl,
+        color,
+        temperatureIndex: temperatureType - 1,
+        categoryIndex,
+        temperatureType,
+        categoryType,
+        curCategoryType:categoryType,
+        curId:_id,
+        occasionIndex,
+        occasionType
+      })
+    }
   },
 
   addImage(e) {
@@ -73,8 +116,7 @@ Page({
       temperatureType: app.globalData.leftList[e.detail.value].type
     })
   },
-  selectClothesTemperature(e){
-    console.log(e);
+  selectClothesTemperature(e) {
     this.setData({
       clothestemperatureIndex: e.detail.value,
     })
@@ -85,8 +127,14 @@ Page({
       categoryType: app.globalData.rightList[e.detail.value].type
     })
   },
-  getColor(event){
-    console.log('event',event);
+  selectOccasion(e) {
+    this.setData({
+      occasionIndex: e.detail.value,
+      occasionType: app.globalData.occasionList[e.detail.value].type
+    })
+  },
+  
+  getColor(event) {
     this.setData({
       color: event.detail.value
     })
@@ -97,13 +145,12 @@ Page({
       temperatureType: this.data.temperatureType,
       // temperature:this.data.clothesTemperature[this.data.clothestemperatureIndex],
       categoryType: this.data.categoryType,
-      color:this.data.color,
-      openid:wx.getStorageSync('openid')
+      occasionType: this.data.occasionType,
+      color: this.data.color,
+      openid: wx.getStorageSync('openid')
+      
     }
-    this.addData(data)
-  },
-
-  async addData(data) {
+    console.log('submit',data);
     if (!this.data.imageUrl) {
       showModal('请先添加照片')
       return
@@ -112,7 +159,19 @@ Page({
       showModal('请输入衣物颜色')
       return
     }
-    showLoading('正在添加')
+    if(this.data.add){
+      this.addData(data)
+    }else{
+      data.curId = this.data.curId
+      this.updateClothes(data)
+    }
+   
+   
+  },
+
+  async addData(data,flag=true) {
+   
+    showLoading(flag?'正在添加':"正在修改")
     // 发起添加数据到云数据库请求
     let add = await addData(data)
 
@@ -122,13 +181,13 @@ Page({
 
     if (code === 0) {
       wx.showToast({
-        title: '添加成功',
+        title: flag?'添加成功':"修改成功",
         icon: 'success',
         duration: 2000
       })
       setTimeout(() => {
-        wx.switchTab({
-          url: '../wardrobe/wardrobe',
+        wx.navigateBack({
+          url: `../wardrobe/wardrobe?type=${this.data.curType}`,
         })
       }, 1000)
       hideLoading()
@@ -139,5 +198,52 @@ Page({
       hideLoading()
 
     }
-  }
+  },
+  //编辑 
+  updateClothes(data){
+    console.log('data.categoryType',data);
+    db.collection(data.categoryType).where({
+      _id: data.curId
+    }).get({
+      success:(res)=>{
+        if(res.data.length == 0){
+          this.formatDate(data)
+        }else{
+          db.collection(data.categoryType).doc(data.curId).update({
+            // data 传入需要局部更新的数据
+            data,
+            success: (res)=> {
+              console.log(res);
+              if(res.errMsg=="document.update:ok"){
+                wx.showToast({
+                  title: '修改成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+                setTimeout(() => {
+                  console.log('setTimeout',this.data.curType);
+                  wx.navigateBack({
+                    url: `../wardrobe/wardrobe?type=${this.data.curType}`,
+                  })
+                }, 1000)
+              }
+            }
+          })
+        }
+      }
+    })
+   
+  },
+  //所选集合没有该数据 则先将原集合数据删除再添加
+formatDate(data){
+  db.collection(this.data.curCategoryType).doc(data.curId).remove({
+    success: (res) =>{
+      console.log(res)
+      if (res.errMsg =="document.remove:ok") {
+       this.addData(data,false)
+      }
+    }
+  })
+}
 })
+

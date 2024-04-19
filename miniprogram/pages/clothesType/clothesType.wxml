@@ -1,0 +1,16 @@
+<!--pages/clothesType/clothesType.wxml-->
+<view class="type-page">
+  <view class="type-item" bind:tap="toClothes" data-type="temperature">
+    <view class="type">按温度分类</view>
+    <view class="title">
+      <text wx:for="{{temperatureType}}" wx:key="index"> {{item.title}}</text>
+    </view>
+  </view>
+  <view class="type-item" bind:tap="toClothes" data-type="occasion">
+    <view class="type">按场合分类</view>
+    <view class="title">
+      <text wx:for="{{occasionList}}" wx:key="index"> {{item.title}}</text>
+    </view>
+  </view>
+</view>
+

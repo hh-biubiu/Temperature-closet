@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/wardrobe/wardrobe",
-    "pages/addition/addition"
+    "pages/addition/addition",
+    "pages/clothesType/clothesType"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -23,7 +24,7 @@
         "selectedIconPath": "images/home_index_active.png"
       },
       {
-        "pagePath": "pages/wardrobe/wardrobe",
+        "pagePath": "pages/clothesType/clothesType",
         "text": "衣柜",
         "iconPath": "images/home_my.png",
         "selectedIconPath": "images/home_my_active.png"

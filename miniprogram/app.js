@@ -1,5 +1,5 @@
 App({
-  onLaunch: function() {
+  onLaunch: function () {
 
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -14,7 +14,7 @@ App({
       })
     }
     this.globalData = {
-      isLogin:false,
+      isLogin: false,
       leftList: [{
           title: '炎热',
           temperature: '28°C以上',
@@ -53,6 +53,17 @@ App({
           type: 'skirt'
         },
       ],
+      occasionList: [{
+        title: '正式',
+        type: 1
+      }, {
+        title: '休闲',
+        type: 2
+
+      }, {
+        title: '运动',
+        type: 3
+      }]
     }
   }
 })

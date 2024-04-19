@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" catch:tap="cancle">
   <view class="leftNav">
     <block wx:for="{{leftList}}" wx:key="index">
       <view
@@ -32,11 +32,26 @@
         wx:for="{{clothes}}"
         wx:key="index"
         wx:if="{{clothes.length>0}}"
+        bind:longpress="longpress"
       >
         <image src="{{item.imageUrl}}" mode="aspectFit" />
+        <view class="opt-btn" hidden="{{!showOpt}}">
+          <view
+            hover-class="checked"
+            bind:tap="toUpdate"
+            data-clothes="{{item}}"
+          >编辑
+          </view>
+          <view
+            hover-class="checked"
+            bind:tap="toDel"
+            data-clothes="{{item}}"
+          >删除
+          </view>
+        </view>
       </view>
       <view class="hint" wx:if="{{clothes.length<=0}}">
-        还未有适合当前气候的上衣
+        还未有适合当前{{curType=="temperature"?"气候":'场合'}}的上衣
       </view>
     </scroll-view>
 
@@ -55,11 +70,26 @@
         wx:for="{{pants}}"
         wx:key="index"
         wx:if="{{pants.length>0}}"
+        bind:longpress="longpress"
       >
         <image src="{{item.imageUrl}}" mode="aspectFit" />
+        <view class="opt-btn" hidden="{{!showOpt}}">
+          <view
+            hover-class="checked"
+            bind:tap="toUpdate"
+            data-clothes="{{item}}"
+          >编辑
+          </view>
+          <view
+            hover-class="checked"
+            bind:tap="toDel"
+            data-clothes="{{item}}"
+          >删除
+          </view>
+        </view>
       </view>
       <view class="hint" wx:if="{{pants.length<=0}}">
-        还未有适合当前气候的下衣
+        还未有适合当前{{curType=="temperature"?"气候":'场合'}}的下衣
       </view>
     </scroll-view>
 
@@ -79,11 +109,26 @@
         wx:for="{{coat}}"
         wx:key="index"
         wx:if="{{coat.length>0}}"
+        bind:longpress="longpress"
       >
         <image src="{{item.imageUrl}}" mode="aspectFit" />
+        <view class="opt-btn" hidden="{{!showOpt}}">
+          <view
+            hover-class="checked"
+            bind:tap="toUpdate"
+            data-clothes="{{item}}"
+          >编辑
+          </view>
+          <view
+            hover-class="checked"
+            bind:tap="toDel"
+            data-clothes="{{item}}"
+          >删除
+          </view>
+        </view>
       </view>
       <view class="hint" wx:if="{{coat.length<=0}}">
-        还未有适合当前气候的外套
+        还未有适合当前{{curType=="temperature"?"气候":'场合'}}的外套
       </view>
     </scroll-view>
     <view class='headline'>
@@ -102,11 +147,26 @@
         wx:for="{{skirt}}"
         wx:key="index"
         wx:if="{{skirt.length>0}}"
+        bind:longpress="longpress"
       >
         <image src="{{item.imageUrl}}" mode="aspectFit" />
+        <view class="opt-btn" hidden="{{!showOpt}}">
+          <view
+            hover-class="checked"
+            bind:tap="toUpdate"
+            data-clothes="{{item}}"
+          >编辑
+          </view>
+          <view
+            hover-class="checked"
+            bind:tap="toDel"
+            data-clothes="{{item}}"
+          >删除
+          </view>
+        </view>
       </view>
       <view class="hint" wx:if="{{skirt.length<=0}}">
-        还未有适合当前气候的连衣裙
+        还未有适合当前{{curType=="temperature"?"气候":'场合'}}的连衣裙
       </view>
     </scroll-view>
   </scroll-view>
